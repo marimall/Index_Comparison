@@ -38,9 +38,10 @@ args = parser.parse_args()
 
 indexes = pd.read_excel(args.input_file) # comment if csv
 
+
 #indexes = pd.read_csv(args.input_file, delimiter = "\t") ## uncomment if csv and change the delimiter if you have other than tab
 
-
+indexes = indexes.fillna("N"*len(indexes.iloc[0]["p7_sequence"]))  ### in case you have non equal number of i5 and i7 indexes
 assert (indexes["p7_sequence"].apply(len) == len(indexes.iloc[0]["p7_sequence"])).all(),"Your p7 indexes do not have the same length"
 
 assert (indexes["p5_sequence"].apply(len) == len(indexes.iloc[0]["p5_sequence"])).all(),"Your p5 indexes do not have the same length"
